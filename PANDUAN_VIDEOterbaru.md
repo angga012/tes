@@ -1,7 +1,7 @@
 # Panduan & Naskah Video Presentasi Proyek BangunSewa
 ### Website Promosi dan Katalog Sewa Alat Bangunan
 
-Dokumen ini menjadi panduan perekaman dan naskah presentasi proyek **BangunSewa**. Pembagian materi mengikuti susunan pekan yang diminta: **Anggota 1 — Frontend & DOM Engineer (Pekan 2–3)**, **Anggota 2 — API & Core PHP Engineer (Pekan 4–5)**, dan **Anggota 3 — Lead Architect, OOP & MVC (Pekan 6–7)**. Penjelasan dan demonstrasi di bawah menggunakan berkas yang benar-benar tersedia di proyek.
+Dokumen ini menjadi panduan perekaman dan naskah presentasi proyek **BangunSewa**. Urutan materi mengikuti kode yang tersedia: **Pekan 2** HTML, **Pekan 3** CSS responsif, **Pekan 4** Fetch API dan JSON, **Pekan 5** PHP OOP, **Pekan 6** View PHP, serta **Pekan 7** alur MVC.
 
 > **Catatan sebelum merekam:** Nama anggota, NIM, tautan repositori, dan ketentuan pengumpulan perlu disesuaikan dengan kelompok. Pembagian tiga anggota di bawah adalah usulan agar topik tidak tumpang tindih. Tunjukkan hasil dari kode yang benar-benar tersedia; jangan menyebut formulir sebagai transaksi yang tersimpan.
 
@@ -36,8 +36,8 @@ Dokumen ini menjadi panduan perekaman dan naskah presentasi proyek **BangunSewa*
 ```mermaid
 flowchart LR
     A["01. Pembukaan & setup"] --> B["02. HTML dan CSS"]
-    B --> C["03. API & Core PHP"]
-    C --> D["04. OOP & MVC"]
+    B --> C["03. Fetch API & JSON"]
+    C --> D["04. PHP OOP & MVC"]
     D --> E["05. Kesimpulan"]
 ```
 
@@ -45,9 +45,9 @@ flowchart LR
 
 | Anggota | Peran | Cakupan | Berkas utama | Demo |
 | :--- | :--- | :--- | :--- | :--- |
-| **Anggota 1** | **Frontend & DOM Engineer** | **Pekan 2–3:** HTML semantik, CSS responsif, pemilihan elemen DOM, dan event navigasi | `Pertama/Index.html`, `Kedua/Index.html`, `Kedua/style.css`, `Ketiga/Style.css`, `TailWind/Tailwind.html` | Bandingkan halaman dan layout mobile; demonstrasikan menu hamburger serta navigasi. |
-| **Anggota 2** | **API & Core PHP Engineer** | **Pekan 4–5:** pengambilan data JSON dengan Fetch API, status API, serta pemrosesan data PHP | `TailWind/Tailwind.html`, `TailWind/tools.json`, `TailWind/Controller/PeralatanController.php`, `TailWind/Model/PeralatanModel.php` | Tunjukkan Fetch dan state di browser, lalu data array dan proses `foreach` PHP. |
-| **Anggota 3 (Lead)** | **Lead Architect, OOP & MVC** | **Pekan 6–7:** desain class OOP dan integrasi Model-Controller-View | `TailWind/Model/PeralatanModel.php`, `TailWind/index.php`, `TailWind/Controller/PeralatanController.php`, `TailWind/View/katalog_view.php` | Jelaskan class dan enkapsulasi, lalu jalankan alur MVC dan tampilkan katalog. |
+| **Anggota 1** | HTML & CSS Engineer | **Pekan 2–3:** HTML semantik, stylesheet, layout, dan responsive design | `Pertama/Index.html`, `Kedua/Index.html`, `Kedua/style.css`, `Ketiga/Style.css` | Bandingkan halaman awal dengan versi CSS; uji layout desktop dan mobile. |
+| **Anggota 2** | Fetch API & PHP OOP Engineer | **Pekan 4–5:** pemuatan JSON dengan Fetch, rendering DOM, status jaringan, dan class Model | `TailWind/Tailwind.html`, `TailWind/tools.json`, `TailWind/Model/PeralatanModel.php` | Tunjukkan katalog JSON, estimasi harga, state fetch, properti/getter PHP, serta format Rupiah. |
+| **Anggota 3 (Lead)** | PHP View & MVC Engineer | **Pekan 6–7:** template katalog PHP dan alur Model-Controller-View | `TailWind/View/katalog_view.php`, `TailWind/Controller/PeralatanController.php`, `TailWind/index.php` | Jalankan server, buka katalog MVC, jelaskan data yang diteruskan ke View dan hasil render. |
 
 Sesuaikan matriks ini dengan kontribusi yang benar-benar dikerjakan setiap anggota. Jika proyek dikerjakan sendiri atau jumlah anggota berbeda, ubah jumlah pembicara dan pembagian materinya.
 
@@ -57,7 +57,7 @@ Sesuaikan matriks ini dengan kontribusi yang benar-benar dikerjakan setiap anggo
 
 Nomor berikut adalah nomor baris pada berkas proyek saat panduan ini disusun. Jika kode berubah, cari nama fungsi/elemen yang disebutkan karena nomor baris bisa bergeser.
 
-#### Anggota 1 — Frontend & DOM Engineer (Pekan 2 dan 3)
+#### Anggota 1 — Pekan 2 dan 3: HTML & CSS
 
 - **Pekan 2 — `Pertama/Index.html`:**
   - Baris **10–21**: header dan navigasi.
@@ -73,10 +73,8 @@ Nomor berikut adalah nomor baris pada berkas proyek saat panduan ini disusun. Ji
   - Baris **64–148**: hero, tombol, dan kartu hero.
   - Baris **170–227**: kartu katalog.
   - Baris **275–309**: penyempurnaan layout responsif.
-- **Interaksi DOM — JavaScript di `TailWind/Tailwind.html`:**
-  - Baris **369–387**: memilih tombol dan navigasi dengan `getElementById`, menangani klik, membuka/menutup menu mobile, dan memperbarui atribut aksesibilitas.
 
-#### Anggota 2 — API & Core PHP Engineer (Pekan 4 dan 5)
+#### Anggota 2 — Pekan 4 dan 5: Fetch API, JSON, dan PHP OOP
 
 - **Pekan 4 — `TailWind/tools.json`:**
   - Baris **1–54**: struktur JSON dan enam data alat.
@@ -86,26 +84,24 @@ Nomor berikut adalah nomor baris pada berkas proyek saat panduan ini disusun. Ji
   - Baris **436–525**: membuat kartu katalog dan opsi alat dari JSON.
   - Baris **526–582**: fetch, loading/success/error, validasi data, serta tombol muat ulang.
   - Baris **583–607**: event pilihan alat, durasi, submit formulir demo, dan pemanggilan awal Fetch.
-- **Pekan 5 — pemrosesan data PHP:**
-  - `TailWind/Model/PeralatanModel.php`, baris **36–94**: array enam data alat yang dipakai sebagai sumber data PHP.
-  - `TailWind/Controller/PeralatanController.php`, baris **4–23**: `require_once`, pemanggilan sumber data, iterasi `foreach`, dan penyiapan daftar untuk View.
-  - Fokus penjelasan Pekan 5 adalah alur pemrosesan data PHP. Pembahasan class, properti, constructor, dan enkapsulasi ditempatkan pada materi OOP Anggota 3.
-
-#### Anggota 3 — Lead Architect, OOP & MVC (Pekan 6 dan 7)
-
-- **Pekan 6 — `TailWind/Model/PeralatanModel.php`:**
+- **Pekan 5 — `TailWind/Model/PeralatanModel.php`:**
   - Baris **4–21**: class, properti private bertipe, dan constructor.
   - Baris **23–34**: getter dan `getHargaFormatted()`.
-  - Baris **36–94**: method sumber data `getAllData()` yang digunakan oleh alur aplikasi.
+  - Baris **36–94**: `getAllData()` dan enam data contoh.
+
+#### Anggota 3 — Pekan 6 dan 7: View dan MVC
+
+- **Pekan 6 — `TailWind/View/katalog_view.php`:**
+  - Baris **1–12**: awal template HTML dan setup tampilan.
+  - Baris **87–122**: loop katalog, kartu, dan getter objek.
+  - Baris **127–154**: bagian cara sewa.
+  - Baris **156–193**: formulir permintaan dan pilihan alat dari `$daftarAlat`.
 - **Pekan 7 — `TailWind/Controller/PeralatanController.php`:**
-  - Baris **6–24**: Controller menyiapkan objek dan memuat View.
+  - Baris **6–24**: `index()`, mengambil data Model, membuat objek, dan memuat View.
 - **Pekan 7 — `TailWind/index.php`:**
   - Baris **1–8**: memuat Controller dan memanggil `index()`.
-- **Pekan 7 — `TailWind/View/katalog_view.php`:**
-  - Baris **87–122**: loop katalog dan tampilan kartu.
-  - Baris **127–193**: bagian cara sewa dan formulir demo.
-
-> **Penyesuaian terhadap kode proyek:** folder ini tidak memiliki endpoint REST API PHP, fungsi helper prosedural terpisah, ataupun file `data_menu.php`. Materi API Pekan 4 didemonstrasikan dengan Fetch API ke `tools.json`; materi Core PHP Pekan 5 ditunjukkan lewat pengambilan array data, `require_once`, dan `foreach` pada alur PHP yang tersedia. Pekan 6 membahas OOP, sedangkan Pekan 7 menghubungkan komponen MVC. Jangan menyebut Fetch JSON sebagai REST API.
+- **Penghubung Model — `TailWind/Model/PeralatanModel.php`:**
+  - Baris **36–94**: sumber enam data contoh yang dipakai dalam alur MVC.
 
 ---
 
@@ -136,8 +132,8 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 ---
 
-### SEGMENT 2 — PEKAN 2–3: FRONTEND & DOM
-**Pembicara:** Anggota 1 · **Durasi saran:** 3–4 menit
+### SEGMENT 2 — HTML Semantik dan Perkembangan Tampilan
+**Pekan 2–3 · Pembicara:** Anggota 1 · **Durasi saran:** 2–3 menit
 
 #### Langkah 2.1 — Struktur halaman
 
@@ -179,33 +175,14 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 2. Gunakan DevTools dengan `F12` untuk beralih antara ukuran desktop dan mobile.
 3. Perlihatkan perubahan susunan hero, navigasi, dan grid kartu. Jangan mengklaim jumlah kolom mobile yang tidak sesuai dengan hasil yang tampil.
 
-#### Langkah 2.3 — Pekan 3: Pemilihan DOM dan Event Menu Mobile
-
-**Aksi layar (VS Code):**
-
-1. Di `TailWind/Tailwind.html`, buka JavaScript baris **369–387**.
-2. Tunjukkan pemilihan `menu-btn` dan `menu`, event `click`, serta perubahan class dan atribut `aria-expanded`.
-3. Tunjukkan event klik tautan navigasi yang menutup menu mobile.
-
 **Naskah bicara — Dibacakan Anggota 1:**
 
-> “Untuk melengkapi bagian Frontend dan DOM pada Pekan 3, di `TailWind/Tailwind.html` baris 369 sampai 387 JavaScript memilih tombol dan menu menggunakan `getElementById`. Event `click` pada tombol mengubah status menu dengan menambah atau menghapus class tersembunyi, sekaligus memperbarui `aria-expanded` dan label tombol.”
->
-> “Pada bagian yang sama, setiap tautan navigasi diberi event klik agar menu mobile tertutup setelah dipilih. Kita buktikan dengan mengecilkan layar, membuka tombol hamburger, lalu memilih salah satu tautan.”
-
-**Aksi layar (browser):**
-
-1. Buka `http://localhost:8000/TailWind/Tailwind.html` pada tampilan mobile.
-2. Tekan tombol menu hamburger untuk membuka, lalu pilih tautan navigasi untuk menutup menu.
-
-**Naskah bicara — Dibacakan Anggota 1:**
-
-> “Demikian bagian Frontend dan DOM dari saya. Selanjutnya, [Nama Anggota 2] akan menjelaskan pengambilan data API menggunakan Fetch API dan pemrosesan data dengan PHP.”
+> “Demikian bagian HTML dan CSS dari saya. Selanjutnya, [Nama Anggota 2] akan menjelaskan pemuatan data katalog menggunakan Fetch API dan pemodelan data PHP.”
 
 ---
 
-### SEGMENT 3 — PEKAN 4–5: API & CORE PHP
-**Pembicara:** Anggota 2 · **Durasi saran:** 4–5 menit
+### SEGMENT 3 — Tailwind CSS, Fetch API, dan Data JSON
+**Pekan 4–5 · Pembicara:** Anggota 2 · **Durasi saran:** 3–4 menit
 
 #### Langkah 3.1 — Halaman Tailwind
 
@@ -247,66 +224,60 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 > **Catatan akurasi:** `tools.json` adalah file JSON statis yang dibaca melalui Fetch API, bukan endpoint REST API. Formulir pada halaman HTML adalah simulasi di browser dan tidak menyimpan permintaan ke server.
 
-#### Langkah 3.3 — Pekan 5: Pemrosesan Data dengan Core PHP
-
-**Aksi layar (VS Code):**
-
-1. Buka `TailWind/Model/PeralatanModel.php`, baris **36–94**, untuk menunjukkan array enam data yang menjadi sumber katalog PHP.
-2. Buka `TailWind/Controller/PeralatanController.php`, baris **4–23**.
-3. Tunjukkan `require_once` baris **4**, pemanggilan `PeralatanModel::getAllData()` baris **8**, loop `foreach` baris **11**, dan pemuatan View baris **23**.
-4. Untuk bagian ini fokuskan penjelasan pada array, pemanggilan data, dan iterasi PHP. Simpan detail class/properti/getter untuk pembahasan OOP Anggota 3.
-
-**Naskah bicara — Dibacakan Anggota 2:**
-
-> “Berikutnya Pekan 5, bagian Core PHP yang tersedia pada proyek ini berfokus pada pemrosesan data katalog. Di `TailWind/Model/PeralatanModel.php` baris 36 sampai 94 terdapat enam data alat dalam bentuk array.”
->
-> “Kemudian di `TailWind/Controller/PeralatanController.php` baris 4 sampai 23, `require_once` memuat Model, method `getAllData()` dipanggil pada baris 8, dan `foreach` pada baris 11 mengolah setiap data untuk menyiapkan daftar alat. Pada baris 23, View dimuat menggunakan `require_once`. Data tersebut masih berupa data contoh di kode, belum berasal dari database.”
-
-**Aksi layar (browser):**
-
-1. Buka `http://localhost:8000/TailWind/Tailwind.html` untuk memperlihatkan data katalog yang diambil dari JSON.
-2. Pilih alat dan ubah lama sewa untuk menunjukkan kalkulasi dari Pekan 4.
-3. Jelaskan bahwa PHP memproses array datanya melalui alur terpisah di sisi server.
-
-**Naskah bicara — Dibacakan Anggota 2:**
-
-> “Kesimpulannya, bagian API Pekan 4 menggunakan Fetch untuk membaca file JSON, sedangkan Core PHP Pekan 5 menunjukkan bagaimana array data dipanggil dan diproses di server. File JSON bukan endpoint REST API, dan proyek ini belum memiliki endpoint PHP atau helper prosedural terpisah. Selanjutnya, [Nama Anggota 3] akan membahas OOP dan arsitektur MVC.”
-
----
-
-### SEGMENT 4 — PEKAN 6–7: LEAD ARCHITECT, OOP & MVC
-**Pembicara:** Anggota 3 / Lead · **Durasi saran:** 4–5 menit
-
-#### Langkah 4.1 — Pekan 6: Object-Oriented Programming (OOP)
+#### Langkah 3.3 — Pekan 5: Model PHP dan OOP
 
 **Aksi layar (VS Code):**
 
 1. Buka `TailWind/Model/PeralatanModel.php`.
-2. Sorot baris **4–21** untuk class `PeralatanModel`, tujuh properti `private` bertipe, dan constructor.
+2. Sorot baris **4–21** untuk class, properti private, dan constructor.
 3. Sorot baris **23–34** untuk getter dan method `getHargaFormatted()`.
-4. Sorot baris **36–94** untuk method `getAllData()` dan array enam alat.
+4. Sorot baris **36–94** untuk `getAllData()` serta enam data alat.
+
+**Naskah bicara — Dibacakan Anggota 2:**
+
+> “Pada Pekan 5, di `TailWind/Model/PeralatanModel.php` baris 4 sampai 21 kami membuat class `PeralatanModel` dengan properti bertipe `private` dan constructor untuk mengisi identitas, nama, informasi gambar, kategori, deskripsi, serta harga alat.”
+>
+> “Getter pada baris 23 sampai 29 menyediakan akses ke properti tersebut, sedangkan `getHargaFormatted()` pada baris 31 sampai 33 mengubah harga menjadi format Rupiah. Method `getAllData()` pada baris 36 sampai 94 mengembalikan enam data contoh. Data PHP ini masih ditulis langsung di Model, belum diambil dari database atau file JSON.”
+
+**Aksi layar (browser):** Anggota 2 kembali ke `http://localhost:8000/TailWind/Tailwind.html`, pilih alat, lalu ubah lama sewa untuk menunjukkan estimasi.
+
+**Naskah bicara — Dibacakan Anggota 2:**
+
+> “Itulah bagian Fetch API dan pemodelan data PHP yang saya presentasikan. Berikutnya, [Nama Anggota 3] akan menjelaskan bagaimana data objek tersebut disiapkan Controller dan dirender oleh View.”
+
+---
+
+### SEGMENT 4 — PHP View dan Arsitektur MVC
+**Pekan 6–7 · Pembicara:** Anggota 3 / Lead · **Durasi saran:** 3–4 menit
+
+#### Langkah 4.1 — Pekan 6: View katalog PHP
+
+**Aksi layar (VS Code):**
+
+1. Buka `TailWind/View/katalog_view.php`.
+2. Sorot baris **87–122**, terutama loop `foreach` baris 98 dan getter yang mengisi kartu.
+3. Sorot baris **127–154** untuk bagian Cara Sewa.
+4. Sorot baris **156–193** untuk formulir dan dropdown alat yang dibentuk dari `$daftarAlat`.
 
 **Naskah bicara — Dibacakan Anggota 3 (Lead):**
 
-> “Terima kasih, [Nama Anggota 2]. Saya [Nama Anggota 3, NIM], bertanggung jawab sebagai Lead Architect dan membawakan Pekan 6 serta Pekan 7. Pada Pekan 6, di `TailWind/Model/PeralatanModel.php` baris 4 sampai 21 kami membangun class `PeralatanModel` sebagai blueprint data alat. Terdapat tujuh atribut bertipe, seperti `id`, `name`, `category`, dan `pricePerDay`, yang dienkapsulasi menggunakan akses `private`. Constructor pada baris 13 sampai 21 menginisialisasi nilai atribut tersebut.”
+> “Terima kasih, [Nama Anggota 2]. Saya [Nama Anggota 3, NIM], membawakan Pekan 6 dan Pekan 7. Pada Pekan 6, di `TailWind/View/katalog_view.php` baris 87 sampai 122 terdapat View katalog. Loop `foreach` pada baris 98 membaca `$daftarAlat`, lalu getter seperti `getImageUrl()`, `getCategory()`, `getName()`, `getDescription()`, dan `getHargaFormatted()` mengisi tampilan setiap kartu.”
 >
-> “Akses ke data dilakukan melalui getter pada baris 23 sampai 29. Method `getHargaFormatted()` pada baris 31 sampai 33 memformat harga harian menjadi Rupiah. Sementara itu, method `getAllData()` pada baris 36 sampai 94 menyediakan enam data contoh untuk digunakan aplikasi.”
+> “Baris 127 sampai 154 berisi bagian Cara Sewa. Kemudian baris 156 sampai 193 menampilkan formulir permintaan dan membangun pilihan alat dari objek yang sama. Formulir ini masih sebatas antarmuka; belum mengirim atau menyimpan permintaan.”
 
-#### Langkah 4.2 — Pekan 7: Arsitektur Model-View-Controller (MVC)
+#### Langkah 4.2 — Pekan 7: Controller, View, dan entry point
 
 **Aksi layar (VS Code):**
 
 1. Buka `TailWind/index.php`, baris **1–8**, sebagai entry point yang memuat Controller dan memanggil `index()`.
 2. Buka `TailWind/Controller/PeralatanController.php`, baris **6–24**, untuk alur mengambil data, membentuk objek, dan memuat View.
-3. Buka `TailWind/View/katalog_view.php`, baris **87–122**, untuk loop katalog dan tampilan kartu; lalu baris **156–193** untuk formulir demo.
+3. Sebutkan bahwa sumber data Model ada di `TailWind/Model/PeralatanModel.php`, baris **36–94**; Model dan class sudah diperkenalkan Anggota 2.
 
 **Naskah bicara — Dibacakan Anggota 3 (Lead):**
 
-> “Pada Pekan 7, kode dipisah ke dalam arsitektur Model-View-Controller. Di `TailWind/index.php` baris 1 sampai 8, berkas entry point memuat Controller, membuat objeknya, lalu memanggil method `index()`.”
+> “Pada Pekan 7, alur MVC dimulai dari `TailWind/index.php` baris 1 sampai 8. Baris 3 memuat `PeralatanController.php`, lalu baris 6 dan 7 membuat Controller dan menjalankan method `index()`.”
 >
-> “Di `TailWind/Controller/PeralatanController.php` baris 6 sampai 24, method `index()` meminta data dari Model, mengubah setiap item menjadi objek `PeralatanModel`, kemudian memuat View. Terakhir, di `TailWind/View/katalog_view.php` baris 87 sampai 122, View melakukan loop dan menggunakan getter dari objek untuk merender kartu katalog. Inilah alur proyek kita: Model menyediakan data dan representasi objek, Controller menyiapkan alur, lalu View menghasilkan tampilan.”
-
-> “Formulir pada View terlihat di baris 156 sampai 193, tetapi masih berupa antarmuka demo. Formulir belum menyimpan permintaan ke database atau memproses transaksi.”
+> “Di `TailWind/Controller/PeralatanController.php` baris 6 sampai 24, method `index()` meminta data melalui `PeralatanModel::getAllData()`, mengiterasi array, membungkus tiap item menjadi objek `PeralatanModel`, lalu memuat `katalog_view.php`. Sumber data Model berada di `TailWind/Model/PeralatanModel.php` baris 36 sampai 94, sementara View yang menampilkan kartu berada di `TailWind/View/katalog_view.php` baris 87 sampai 122. Jadi, alurnya adalah Model menyediakan data, Controller menyiapkan objek, dan View merender katalog.”
 
 #### Langkah 4.3 — Demo langsung
 
@@ -319,7 +290,7 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Naskah bicara — Dibacakan Anggota 3 (Lead):**
 
-> “Berikut hasil render versi MVC di browser pada `http://localhost:8000/TailWind/index.php`. Enam data alat diproses mengikuti alur Model, Controller, dan View. Kartu katalog menampilkan nama, kategori, deskripsi, dan harga per hari. Fitur ini masih berupa katalog dan formulir antarmuka, belum transaksi atau penyimpanan ke database.”
+> “Berikut hasil render versi MVC di browser pada `http://localhost:8000/TailWind/index.php`. Enam alat yang berasal dari Model telah diproses Controller dan ditampilkan oleh View. Kartu katalog menampilkan nama, kategori, deskripsi, dan harga per hari. Fitur yang ditampilkan masih berupa katalog dan formulir antarmuka; belum ada transaksi atau penyimpanan ke database.”
 
 ---
 
@@ -330,19 +301,19 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Naskah bicara — Dibacakan Anggota 1:**
 
-> “Sebagai kesimpulan, proyek BangunSewa memperlihatkan tahapan pembuatan website promosi dan katalog alat bangunan: Pekan 2 dan 3 berfokus pada Frontend dan DOM, Pekan 4 dan 5 pada API serta Core PHP, lalu Pekan 6 dan 7 pada OOP dan arsitektur MVC.”
+> “Sebagai kesimpulan, proyek BangunSewa memperlihatkan tahapan pembuatan website promosi dan katalog alat bangunan: mulai dari HTML dan CSS, dilanjutkan Fetch API serta pemodelan PHP OOP, lalu dihubungkan melalui View dan alur MVC.”
 
 **Naskah bicara — Dibacakan Anggota 1:**
 
-> “Saya, [nama dan NIM Anggota 1], sebagai **Frontend & DOM Engineer**, membawakan Pekan 2 dan Pekan 3. Struktur HTML ada di `Pertama/Index.html` baris 10 sampai 211, CSS responsif ada di `Kedua/style.css` baris 51 sampai 235 dan `Ketiga/Style.css` baris 24 sampai 309, sedangkan pemilihan elemen DOM dan event menu mobile ada di `TailWind/Tailwind.html` baris 369 sampai 387.”
+> “Saya, [nama dan NIM Anggota 1], membawakan Pekan 2 dan Pekan 3. Bagian HTML saya tunjukkan di `Pertama/Index.html` baris 10 sampai 211, sedangkan pengembangan CSS responsif ada di `Kedua/style.css` baris 51 sampai 235 dan penyempurnaan visual di `Ketiga/Style.css` baris 24 sampai 309.”
 
 **Naskah bicara — Dibacakan Anggota 2:**
 
-> “Saya, [nama dan NIM Anggota 2], sebagai **API & Core PHP Engineer**, membawakan Pekan 4 dan Pekan 5. Fetch API serta status pemuatan ada di `TailWind/Tailwind.html` baris 389 sampai 607, sumber JSON ada di `TailWind/tools.json` baris 1 sampai 54, dan pemrosesan data PHP melalui `require_once` serta `foreach` ada di `TailWind/Controller/PeralatanController.php` baris 4 sampai 23.”
+> “Saya, [nama dan NIM Anggota 2], membawakan Pekan 4 dan Pekan 5. Fetch API, rendering katalog, dan estimasi sewa terdapat di `TailWind/Tailwind.html` baris 389 sampai 607, data JSON ada di `TailWind/tools.json` baris 1 sampai 54, serta class dan format harga ada di `TailWind/Model/PeralatanModel.php` baris 4 sampai 94.”
 
 **Naskah bicara — Dibacakan Anggota 3 (Lead):**
 
-> “Saya, [nama dan NIM Anggota 3], sebagai **Lead Architect, OOP & MVC**, membawakan Pekan 6 dan Pekan 7. Class dan enkapsulasi ada di `TailWind/Model/PeralatanModel.php` baris 4 sampai 34. Alur MVC ditunjukkan oleh `TailWind/index.php` baris 1 sampai 8, `TailWind/Controller/PeralatanController.php` baris 6 sampai 24, serta `TailWind/View/katalog_view.php` baris 87 sampai 122. Data pada demo masih berupa contoh dan formulir belum menyimpan permintaan. Terima kasih atas perhatian Bapak/Ibu. Wassalamu’alaikum warahmatullahi wabarakatuh.”
+> “Saya, [nama dan NIM Anggota 3], membawakan Pekan 6 dan Pekan 7. View katalog ada di `TailWind/View/katalog_view.php` baris 87 sampai 193, alur Controller ada di `TailWind/Controller/PeralatanController.php` baris 6 sampai 24, dan entry point ada di `TailWind/index.php` baris 1 sampai 8. Data pada demo masih berupa data contoh dan formulir belum terhubung ke penyimpanan backend. Terima kasih atas perhatian Bapak/Ibu. Wassalamu’alaikum warahmatullahi wabarakatuh.”
 
 ---
 
@@ -372,25 +343,25 @@ Repositori: <URL-REPOSITORI>
 
 ANGGOTA DAN KONTRIBUSI:
 1. [NIM] - [Nama]
-   Peran: Frontend & DOM Engineer
-   Kontribusi: Pekan 2–3 (HTML semantik, CSS responsif, DOM dan event navigasi).
-   Berkas: Pertama/Index.html, Kedua/Index.html, Kedua/style.css, Ketiga/Style.css, TailWind/Tailwind.html
+   Peran: HTML & CSS Engineer
+   Kontribusi: Pekan 2 (HTML semantik) dan Pekan 3 (stylesheet, layout, responsive design).
+   Berkas: Pertama/Index.html, Kedua/Index.html, Kedua/style.css, Ketiga/Style.css
 2. [NIM] - [Nama]
-   Peran: API & Core PHP Engineer
-   Kontribusi: Pekan 4 (Fetch API dan status jaringan) serta Pekan 5 (data array dan pemrosesan data dengan PHP).
-   Berkas: TailWind/Tailwind.html, TailWind/tools.json, TailWind/Controller/PeralatanController.php, TailWind/Model/PeralatanModel.php
+   Peran: Fetch API & PHP OOP Engineer
+   Kontribusi: Pekan 4 (Fetch API, rendering katalog, dan status jaringan) serta Pekan 5 (Model PHP, getter, dan format Rupiah).
+   Berkas: TailWind/Tailwind.html, TailWind/tools.json, TailWind/Model/PeralatanModel.php
 3. [NIM] - [Nama]
-   Peran: Lead Architect, OOP & MVC
-   Kontribusi: Pekan 6 (class OOP dan enkapsulasi) serta Pekan 7 (integrasi Model, Controller, View, dan entry point).
-   Berkas: TailWind/Model/PeralatanModel.php, TailWind/index.php, TailWind/Controller/PeralatanController.php, TailWind/View/katalog_view.php
+   Peran: PHP View & MVC Engineer
+   Kontribusi: Pekan 6 (View katalog) dan Pekan 7 (Controller, entry point, serta alur MVC).
+   Berkas: TailWind/View/katalog_view.php, TailWind/Controller/PeralatanController.php, TailWind/index.php
 
 TIMESTAMPS / CHAPTERS:
 00:00 Pembukaan dan setup proyek
-01:30 Pekan 2: Frontend - HTML semantik dan katalog
-03:00 Pekan 3: Frontend & DOM - CSS responsif dan event menu
-05:00 Pekan 4: API - Fetch API, data JSON, dan status jaringan
-07:30 Pekan 5: Core PHP - data array dan pemrosesan server-side
-09:00 Pekan 6: OOP - class PeralatanModel dan enkapsulasi
-10:30 Pekan 7: MVC - Model, Controller, View, dan demo katalog
+01:30 Pekan 2: Struktur HTML semantik dan katalog
+03:00 Pekan 3: CSS dan desain responsif
+05:00 Pekan 4: Fetch API, data JSON, dan rendering katalog
+08:00 Pekan 5: PHP OOP dan PeralatanModel
+09:30 Pekan 6: View katalog PHP
+11:00 Pekan 7: Controller, entry point, dan demo MVC
 13:30 Kesimpulan dan pembagian kontribusi
 ```

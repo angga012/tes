@@ -325,26 +325,23 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 ---
 
-### SEGMENT 5 — Kesimpulan dan Kontribusi
-**Pembicara:** Anggota 1 membuka kesimpulan, lalu Anggota 1, 2, dan 3 menyebutkan bagian masing-masing · **Durasi saran:** 1–2 menit
+### SEGMENT 5: PENUTUP & PEMBAGIAN KONTRIBUSI ANGGOTA (Wajib Sesuai Rubrik Dosen)
 
-**Aksi layar:** Tampilkan tabel pembagian peran dan halaman katalog terakhir.
+- **Total Durasi:** ~2 menit
+- **Aksi Layar:** Tampilkan tabel pembagian tugas pada Bagian 2.2 atau slide rekapitulasi kontribusi secara penuh dan jelas.
+- **Naskah Bicara (Dibacakan Anggota 3):**
 
-**Naskah bicara — Dibacakan Anggota 1:**
-
-> “Sebagai kesimpulan, proyek BangunSewa memperlihatkan tahapan pembuatan website promosi dan katalog alat bangunan: Pekan 2 dan 3 berfokus pada Frontend dan DOM, Pekan 4 dan 5 pada API serta Core PHP, lalu Pekan 6 dan 7 pada OOP dan arsitektur MVC.”
-
-**Naskah bicara — Dibacakan Anggota 1:**
-
-> “Saya, [nama dan NIM Anggota 1], sebagai **Frontend & DOM Engineer**, membawakan Pekan 2 dan Pekan 3. Struktur HTML ada di `Pertama/Index.html` baris 10 sampai 211, CSS responsif ada di `Kedua/style.css` baris 51 sampai 235 dan `Ketiga/Style.css` baris 24 sampai 309, sedangkan pemilihan elemen DOM dan event menu mobile ada di `TailWind/Tailwind.html` baris 369 sampai 387.”
-
-**Naskah bicara — Dibacakan Anggota 2:**
-
-> “Saya, [nama dan NIM Anggota 2], sebagai **API & Core PHP Engineer**, membawakan Pekan 4 dan Pekan 5. Fetch API serta status pemuatan ada di `TailWind/Tailwind.html` baris 389 sampai 607, sumber JSON ada di `TailWind/tools.json` baris 1 sampai 54, dan pemrosesan data PHP melalui `require_once` serta `foreach` ada di `TailWind/Controller/PeralatanController.php` baris 4 sampai 23.”
-
-**Naskah bicara — Dibacakan Anggota 3 (Lead):**
-
-> “Saya, [nama dan NIM Anggota 3], sebagai **Lead Architect, OOP & MVC**, membawakan Pekan 6 dan Pekan 7. Class dan enkapsulasi ada di `TailWind/Model/PeralatanModel.php` baris 4 sampai 34. Alur MVC ditunjukkan oleh `TailWind/index.php` baris 1 sampai 8, `TailWind/Controller/PeralatanController.php` baris 6 sampai 24, serta `TailWind/View/katalog_view.php` baris 87 sampai 122. Data pada demo masih berupa contoh dan formulir belum menyimpan permintaan. Terima kasih atas perhatian Bapak/Ibu. Wassalamu’alaikum warahmatullahi wabarakatuh.”
+> “Sebagai penutup video dan untuk memperjelas pembagian tugas masing-masing anggota, berikut rekapitulasi kontribusi dalam proyek BangunSewa:
+>
+> 1. Pertama, **[Nama Anggota 1 - NIM]** sebagai **Frontend & DOM Engineer**, bertanggung jawab pada Pekan 2 dan Pekan 3. Kontribusinya meliputi penyusunan halaman promosi dengan HTML semantik, pengembangan tampilan dan layout responsif menggunakan CSS, serta interaksi DOM pada menu navigasi untuk tampilan mobile.
+>
+> 2. Kedua, **[Nama Anggota 2 - NIM]** sebagai **API & Core PHP Engineer**, bertanggung jawab pada Pekan 4 dan Pekan 5. Kontribusinya meliputi pengambilan data katalog secara asinkron menggunakan Fetch API, pembuatan tampilan katalog dari data JSON, serta pengelolaan status pemuatan data. Pada sisi Core PHP, data alat disediakan dalam array dan diproses melalui alur PHP yang digunakan untuk menyiapkan daftar alat.
+>
+> 3. Ketiga, **[Nama Anggota 3 - NIM]** sebagai **Lead Architect, OOP & MVC**, bertanggung jawab pada Pekan 6 dan Pekan 7. Kontribusinya meliputi perancangan class `PeralatanModel` dengan properti privat, constructor, dan getter, serta pengaturan alur Model-View-Controller yang menghubungkan Model, Controller, dan View untuk menampilkan katalog.
+>
+> Proyek BangunSewa merupakan website promosi dan katalog sewa alat bangunan. Data yang digunakan masih berupa data contoh, dan formulir permintaan belum menyimpan transaksi ke database.
+>
+> Demikian presentasi proyek BangunSewa dari kelompok kami. Terima kasih atas perhatian Bapak/Ibu Dosen. Wassalamu’alaikum warahmatullahi wabarakatuh.”
 
 ---
 
