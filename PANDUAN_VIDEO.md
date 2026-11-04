@@ -20,11 +20,13 @@ Dokumen ini menjadi panduan perekaman dan naskah presentasi proyek **BangunSewa*
 ### Persiapan teknis
 
 - Pastikan PHP tersedia dengan menjalankan `php -v`.
-- Untuk demo Fetch dan PHP, jalankan server dari folder proyek:
+- Jalankan halaman HTML dan Fetch melalui VS Code Live Server dari root proyek. Halaman Tailwind dibuka di:
+  `http://127.0.0.1:5500/TailWind/Tailwind.html`
+- Untuk demo PHP MVC, buka terminal pada folder `TailWind` dan jalankan server PHP:
   ```bash
-  php -S localhost:8000
+  php -S 127.0.0.1:8000
   ```
-- Jangan membuka halaman Fetch dengan `file://`; akses melalui server agar `fetch('./tools.json')` dapat membaca JSON.
+- Jangan membuka halaman Fetch dengan `file://`; akses melalui Live Server agar `fetch('./tools.json')` dapat membaca JSON.
 - Ganti `<URL-REPOSITORI>` dan `<folder-repo>` dengan alamat repositori serta nama folder yang benar jika melakukan demonstrasi clone.
 
 ---
@@ -123,14 +125,14 @@ Nomor berikut adalah nomor baris pada berkas proyek saat panduan ini disusun. Ji
    cd <folder-repo>
    git log --oneline -n 10
    ```
-3. Dari root proyek, jalankan `php -S localhost:8000`.
+3. Jalankan Live Server dari root proyek untuk halaman HTML/Fetch, lalu buka terminal pada folder `TailWind` dan jalankan `php -S 127.0.0.1:8000` untuk halaman PHP MVC.
 4. Buka proyek di VS Code dan browser.
 
 #### Naskah bicara — **Dibacakan Anggota 3 (Lead)**
 
 > “Assalamu’alaikum warahmatullahi wabarakatuh. Perkenalkan, kami dari kelompok [nama kelompok], yaitu [nama dan NIM anggota]. Pada video ini kami akan mempresentasikan proyek **BangunSewa**, sebuah website informasi dan katalog penyewaan alat bangunan.”
 >
-> “Kami akan menunjukkan perkembangan halaman dari HTML dan CSS, pemuatan katalog dari file JSON menggunakan Fetch API, serta versi PHP yang memisahkan Model, Controller, dan View. Untuk menjalankan demo PHP, kami menggunakan server lokal PHP pada port 8000.”
+> “Kami akan menunjukkan perkembangan halaman dari HTML dan CSS, pemuatan katalog dari file JSON menggunakan Fetch API, serta versi PHP yang memisahkan Model, Controller, dan View. Halaman Tailwind dan Fetch berjalan melalui Live Server pada port 5500, sedangkan demo MVC dijalankan melalui server PHP pada port 8000.”
 
 Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan jelaskan langkah menjalankan proyek dari folder yang ada. Jangan menampilkan URL clone contoh seolah-olah merupakan repositori asli.
 
@@ -155,7 +157,7 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Aksi layar (browser):**
 
-1. Buka `http://localhost:8000/Pertama/Index.html`.
+1. Buka `http://127.0.0.1:5500/Pertama/Index.html`.
 2. Klik navigasi **Daftar Alat**, **Tentang**, dan **Kontak**.
 3. Tunjukkan bahwa tombol **Lihat Alat** berpindah ke bagian katalog.
 
@@ -175,7 +177,7 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Aksi layar (browser):**
 
-1. Buka `http://localhost:8000/Kedua/Index.html`, kemudian `http://localhost:8000/Ketiga/Index.html`.
+1. Buka `http://127.0.0.1:5500/Kedua/Index.html`, kemudian `http://127.0.0.1:5500/Ketiga/Index.html`.
 2. Gunakan DevTools dengan `F12` untuk beralih antara ukuran desktop dan mobile.
 3. Perlihatkan perubahan susunan hero, navigasi, dan grid kartu. Jangan mengklaim jumlah kolom mobile yang tidak sesuai dengan hasil yang tampil.
 
@@ -195,7 +197,7 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Aksi layar (browser):**
 
-1. Buka `http://localhost:8000/TailWind/Tailwind.html` pada tampilan mobile.
+1. Buka `http://127.0.0.1:5500/TailWind/Tailwind.html` pada tampilan mobile.
 2. Tekan tombol menu hamburger untuk membuka, lalu pilih tautan navigasi untuk menutup menu.
 
 **Naskah bicara — Dibacakan Anggota 1:**
@@ -239,7 +241,7 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Aksi layar (browser):**
 
-1. Buka `http://localhost:8000/TailWind/Tailwind.html`.
+1. Buka `http://127.0.0.1:5500/TailWind/Tailwind.html`.
 2. Tunjukkan katalog setelah data selesai dimuat.
 3. Klik tombol sewa pada salah satu kartu, lalu perlihatkan pilihan alat pada formulir.
 4. Ubah lama sewa dan tunjukkan estimasi yang diperbarui.
@@ -264,7 +266,7 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Aksi layar (browser):**
 
-1. Buka `http://localhost:8000/TailWind/Tailwind.html` untuk memperlihatkan data katalog yang diambil dari JSON.
+1. Buka `http://127.0.0.1:5500/TailWind/Tailwind.html` untuk memperlihatkan data katalog yang diambil dari JSON.
 2. Pilih alat dan ubah lama sewa untuk menunjukkan kalkulasi dari Pekan 4.
 3. Jelaskan bahwa PHP memproses array datanya melalui alur terpisah di sisi server.
 
@@ -312,14 +314,14 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 
 **Aksi layar (browser):**
 
-1. Pastikan server lokal berjalan dari root proyek.
-2. Buka `http://localhost:8000/TailWind/index.php`.
+1. Pastikan server PHP berjalan dari folder `TailWind` dengan `php -S 127.0.0.1:8000`.
+2. Buka `http://127.0.0.1:8000/index.php`.
 3. Tunjukkan katalog enam alat, nama kategori, sumber gambar, dan harga per hari.
 4. Scroll ke bagian cara sewa dan formulir. Jelaskan bahwa formulir PHP pada versi ini belum memiliki handler penyimpanan atau pemrosesan permintaan.
 
 **Naskah bicara — Dibacakan Anggota 3 (Lead):**
 
-> “Berikut hasil render versi MVC di browser pada `http://localhost:8000/TailWind/index.php`. Enam data alat diproses mengikuti alur Model, Controller, dan View. Kartu katalog menampilkan nama, kategori, deskripsi, dan harga per hari. Fitur ini masih berupa katalog dan formulir antarmuka, belum transaksi atau penyimpanan ke database.”
+> “Berikut hasil render versi MVC di browser pada `http://127.0.0.1:8000/index.php`. Enam data alat diproses mengikuti alur Model, Controller, dan View. Kartu katalog menampilkan nama, kategori, deskripsi, dan harga per hari. Fitur ini masih berupa katalog dan formulir antarmuka, belum transaksi atau penyimpanan ke database.”
 
 ---
 
@@ -349,9 +351,11 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 ## 4. Checklist Rekaman
 
 - [ ] Isi nama kelompok, nama/NIM, dan kontribusi yang sebenarnya.
-- [ ] Pastikan PHP tersedia dan server dijalankan dari root proyek.
+- [ ] Jalankan Live Server dari root proyek untuk halaman HTML dan Fetch API.
+- [ ] Jalankan server PHP dari folder `TailWind` untuk demo MVC.
 - [ ] Pastikan URL halaman menggunakan ejaan folder yang sesuai, termasuk `TailWind`.
-- [ ] Buka halaman melalui `localhost`, khususnya untuk demo Fetch API.
+- [ ] Buka halaman Fetch melalui `http://127.0.0.1:5500/TailWind/Tailwind.html`.
+- [ ] Buka halaman MVC melalui `http://127.0.0.1:8000/index.php`.
 - [ ] Pastikan katalog JSON berhasil dimuat sebelum mulai merekam.
 - [ ] Siapkan DevTools untuk menunjukkan layout responsif.
 - [ ] Tampilkan kode yang relevan bersamaan dengan hasilnya di browser.
