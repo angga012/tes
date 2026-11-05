@@ -317,8 +317,8 @@ informasi yang benar sebelum mulai merekam.
 
 > “Untuk menjalankan aplikasi, kami menggunakan server development bawaan PHP
 > pada port 8000. Server harus dijalankan dari root proyek. File `index.php`
-> di root mengarahkan halaman utama ke frontend, sedangkan katalog server-side
-> dapat dibuka melalui `backend/index.php`.
+> di root, baris 3–4, mengarahkan halaman utama ke frontend. Katalog
+> server-side dapat dibuka melalui `backend/index.php`.
 >
 > Struktur proyek memisahkan halaman interaktif pada folder `frontend/` dan
 > data, API serta MVC pada folder `backend/`. Untuk pembahasan antarmuka
@@ -340,20 +340,19 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 1):**
 
-> “Terima kasih [Nama Anggota 3]. Saya [Nama Anggota 1, NIM] bertanggung
-> jawab menjelaskan struktur antarmuka BangunSewa dan interaksi DOM pada
-> Pekan 2 dan Pekan 3.
+> “Terima kasih [Nama Anggota 3]. Saya [Nama Anggota 1, NIM], bertanggung
+> jawab atas antarmuka dan interaksi DOM BangunSewa pada Pekan 2 dan Pekan 3.
 >
-> Pada Pekan 2, file `frontend/index.html` menggunakan struktur HTML semantik.
-> Header berisi identitas dan navigasi, `<main>` membungkus konten utama, dan
-> bagian halaman dibagi menjadi hero, katalog, cara sewa, formulir, serta
-> footer.
+> Pada Pekan 2, di `frontend/index.html` baris 11–30 Tailwind CSS dimuat dari
+> CDN dan dikonfigurasi dengan warna BangunSewa: hijau, oranye, latar terang,
+> dan warna moss, serta font sans-serif. Di baris 44–65 terdapat header,
+> navigasi, dan elemen `<main>` sebagai pembungkus konten utama. Bagian hero
+> berada di baris 67–107.
 >
-> Di baris 11 sampai 30 Tailwind dimuat dari CDN dan dikonfigurasi dengan
-> palet warna BangunSewa: hijau, oranye, dan latar terang. Grid katalog
-> menggunakan dua kolom dan berubah menjadi tiga kolom pada breakpoint `lg`.
-> Kontrol katalog terdiri dari search, filter kategori, kontainer kartu, dan
-> tombol ‘Lihat Lebih Banyak’.”
+> Di baris 257–287 terdapat status pemuatan, kolom pencarian, filter
+> kategori, grid katalog, dan tombol paginasi. Grid pada baris 279 memakai
+> `grid-cols-2` dan berubah menjadi `lg:grid-cols-3`, sehingga tampil dua
+> kolom pada layar lebih kecil dan tiga kolom pada layar besar.”
 
 **Aksi layar (Browser):**
 
@@ -363,10 +362,10 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 1):**
 
-> “Pada ukuran layar yang lebih kecil, grid katalog tetap menggunakan dua
-> kolom. Ketika layar mencapai breakpoint `lg`, katalog berubah menjadi tiga
-> kolom. Bagian hero dan formulir juga memiliki aturan responsif agar konten
-> tersusun sesuai lebar layar.”
+> “Hasilnya dapat dilihat di browser: grid katalog tetap dua kolom pada layar
+> kecil dan menjadi tiga kolom pada breakpoint `lg`. Di kode, aturan
+> responsifnya terlihat langsung pada class Tailwind di baris 68 untuk hero
+> dan baris 279 untuk grid katalog.”
 
 #### Langkah 2.2: Pekan 3 — Seleksi DOM, Filter & Pencarian
 
@@ -377,19 +376,23 @@ informasi yang benar sebelum mulai merekam.
 2. Tunjukkan baris 73–97 untuk pembuatan tombol kategori.
 3. Tunjukkan baris 118–130 untuk pencarian dan empty state.
 4. Tunjukkan baris 133–199 untuk pembuatan kartu secara dinamis.
+5. Tunjukkan baris 201–207 dan 289–300 untuk paginasi dan event listener.
 
 **Naskah bicara (Anggota 1):**
 
-> “Pada Pekan 3, JavaScript memilih elemen HTML menggunakan
-> `getElementById()`. Fungsi `renderCategoryFilters()` membuat tombol dari
-> kategori unik yang ada di data. Saat tombol diklik, kategori aktif berubah
-> dan katalog dirender ulang.
+> “Melangkah ke Pekan 3, di `frontend/script.js` baris 1–43 kami memilih
+> elemen DOM dengan `getElementById()` dan menyiapkan state data, kategori
+> aktif, serta jumlah kartu yang terlihat. Di baris 73–97,
+> `renderCategoryFilters()` membuat tombol untuk kategori unik; event klik
+> memperbarui kategori, mengatur ulang jumlah kartu, lalu merender ulang
+> katalog.
 >
-> Fungsi `showApiTools()` menyaring alat berdasarkan kategori dan kata kunci
-> pada nama, kategori, serta deskripsi. Kartu dibuat menggunakan
-> `document.createElement()` dan teks dimasukkan melalui `textContent`.
-> Pendekatan ini membuat isi katalog mengikuti data, bukan disalin satu per
-> satu ke markup.”
+> Di baris 99–130, `showApiTools()` menyaring alat berdasarkan kategori dan
+> kata pencarian pada nama, kategori, serta deskripsi. Jika tidak ada hasil,
+> baris 126–130 membuat pesan empty state. Di baris 133–199, kartu disusun
+> secara dinamis dengan `document.createElement()` dan teks dipasang melalui
+> `textContent`. Event pencarian ada di baris 289–292, sedangkan event tombol
+> ‘Lihat Lebih Banyak’ ada di baris 294–297 dan menambah kuota empat kartu.”
 
 **Aksi layar (Browser):**
 
@@ -401,12 +404,16 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 1):**
 
-> “Di browser, filter ‘Alat listrik’ memperlihatkan alat sesuai kategori.
-> Pencarian ‘bor’ menemukan Bor Tangan secara langsung tanpa reload halaman.
-> Saat pencarian tidak menghasilkan kecocokan, katalog memberi pesan empty
-> state. Setelah kembali ke ‘Semua’, tombol ‘Lihat Lebih Banyak’ menampilkan
-> dua alat berikutnya. Tombol menambah kuota empat item, tetapi jumlah total
-> data saat ini hanya enam.”
+> “Sekarang kita buktikan di browser. Saat saya memilih ‘Alat listrik’, event
+> klik yang dijelaskan pada baris 73–97 menyaring katalog ke kategori itu.
+> Ketika saya mengetik ‘bor’, event `input` pada baris 289–292 langsung
+> memperbarui hasil tanpa memuat ulang halaman. Kata yang tidak cocok
+> menampilkan empty state yang dibuat pada baris 126–130.
+>
+> Setelah kembali ke kategori ‘Semua’, tombol ‘Lihat Lebih Banyak’
+> menjalankan event pada baris 294–297. Nilai tampil bertambah empat, tetapi
+> karena data katalog hanya berisi enam alat, klik pertama menampilkan dua
+> alat sisanya.”
 
 > “Selanjutnya [Nama Anggota 2] akan membahas Fetch, data JSON, helper PHP,
 > dan endpoint API.”
@@ -425,19 +432,23 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 2):**
 
-> “Terima kasih [Nama Anggota 1]. Saya [Nama Anggota 2, NIM] membahas
-> pemuatan data asinkron pada Pekan 4 dan pemrosesan data PHP pada Pekan 5.
+> “Terima kasih [Nama Anggota 1]. Saya [Nama Anggota 2, NIM], bertanggung
+> jawab atas pemuatan data pada Pekan 4 serta data dan PHP prosedural pada
+> Pekan 5.
 >
-> Pada Pekan 4, frontend menggunakan `async/await` dan Fetch API untuk
-> mengambil `../backend/menu.json`. File JSON dipilih secara langsung supaya
-> frontend juga dapat berjalan lewat server statis seperti Live Server yang
-> tidak menjalankan PHP.
+> Pada Pekan 4, `frontend/script.js` baris 22 menetapkan sumber katalog ke
+> `../backend/menu.json`. Frontend mengambil file JSON langsung agar juga
+> dapat dijalankan melalui server statis yang tidak menjalankan PHP.
+> Di baris 210–223, fungsi `fetchTools()` menampilkan status loading dan
+> spinner, menonaktifkan pilihan alat, lalu memulai `fetch()` dengan
+> `async/await`. Di baris 226–240, kode memeriksa respons HTTP, membaca JSON,
+> dan memastikan properti `tools` adalah array.
 >
-> Fungsi `fetchTools()` menunjukkan status loading dan spinner sebelum
-> request. Setelah respons datang, kode mengecek status HTTP dan memastikan
-> properti `tools` berbentuk array. Jika berhasil, data dirender; jika gagal,
-> pesan error dan tombol ‘Muat Ulang’ ditampilkan. Empty state pencarian
-> berbeda dari error: data berhasil dibaca, tetapi tidak ada item yang cocok.”
+> Jika berhasil, katalog ditampilkan dan status sukses diperbarui pada baris
+> 242–247. Jika gagal, blok `catch` pada baris 249–263 menampilkan pesan
+> error, menyembunyikan spinner, dan menyediakan tombol ‘Muat Ulang’.
+> Empty state pencarian pada baris 126–130 berbeda dari error: data berhasil
+> dimuat, tetapi tidak ada alat yang cocok.”
 
 #### Langkah 3.2: Pekan 5 — Data JSON dan Helper PHP
 
@@ -450,19 +461,21 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 2):**
 
-> “Sumber data proyek berada di `backend/menu.json` dan saat ini berisi enam
-> alat bangunan. Setiap alat memiliki ID, nama, gambar, kategori, deskripsi,
-> dan harga sewa per hari.
+> “Sekarang kita lihat data dan fungsi PHP pada Pekan 5. File
+> `backend/menu.json` menjadi sumber katalog enam alat bangunan. Setiap record
+> memuat identitas alat, gambar, kategori, deskripsi, dan harga sewa per hari.
 >
-> Pada `data_menu.php`, fungsi `getDataMenu()` membaca file JSON dengan path
-> relatif terhadap lokasi file PHP, mem-parsing data, dan memeriksa bahwa
-> struktur `tools` tersedia. Jika file tidak dapat dibaca atau JSON tidak
-> valid, proses menghasilkan error.
+> Di `backend/data/data_menu.php` baris 3–19, fungsi `getDataMenu()` membaca
+> file JSON, mengubahnya menjadi array dengan `json_decode()`, lalu
+> memastikan properti `tools` tersedia dan berbentuk array. Jika file tidak
+> dapat dibaca atau struktur JSON tidak sesuai, fungsi melempar error.
 >
-> File `functions.php` berisi helper `formatRupiah()` untuk format harga,
-> `saringMenu()` untuk pencarian nama/kategori/deskripsi, dan
-> `saringMenuByKategori()` untuk filter kategori. Helper ini dipakai oleh API
-> dan Model sehingga logika filter tidak perlu ditulis ulang.”
+> Di `backend/helpers/functions.php` baris 3–6, `formatRupiah()` memformat
+> harga ke bentuk Rupiah. Baris 8–24 berisi `saringMenu()` untuk mencari
+> nama, kategori, atau deskripsi, dan baris 26–35 berisi
+> `saringMenuByKategori()` untuk mencocokkan kategori tanpa membedakan huruf
+> besar-kecil. Fungsi filter digunakan oleh API dan Model; formatter
+> digunakan oleh class `Peralatan`.”
 
 #### Langkah 3.3: Pekan 5 — Menjalankan Endpoint JSON
 
@@ -474,11 +487,12 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 2):**
 
-> “Endpoint `backend/api.php` menetapkan tipe konten JSON, membaca sumber
-> data yang sama, lalu menerima parameter `kategori` dan `q`. Setelah filter
-> diterapkan, `json_encode()` mengirimkan hasil dengan properti `tools`.
-> Apabila pembacaan atau parsing data gagal, endpoint mengembalikan status
-> HTTP 500 dan respons JSON error.”
+> “Pada `backend/api.php`, baris 6 menetapkan header `Content-Type` sebagai
+> JSON. Baris 8–15 membaca data, menerima parameter `kategori` dan `q`,
+> menerapkan kedua helper filter, lalu mengirim hasil dalam properti `tools`
+> menggunakan `json_encode()`. Blok `catch` pada baris 16–22 mengembalikan
+> status HTTP 500 dan respons JSON error ketika pembacaan atau parsing data
+> gagal.”
 
 **Aksi layar (Browser):**
 
@@ -488,10 +502,12 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 2):**
 
-> “Di browser terlihat endpoint menghasilkan JSON. Saat query kategori
-> ditambahkan, hanya alat listrik yang dikembalikan. Query `q=bor` mencari
-> kata tersebut pada nama, kategori, dan deskripsi. Endpoint ini adalah demo
-> tersendiri; frontend saat ini mengambil file JSON secara langsung.”
+> “Di browser, endpoint menampilkan respons JSON. Parameter
+> `?kategori=Alat%20listrik` menyaring kategori di server, sedangkan
+> `?q=bor` mencari kata ‘bor’ pada nama, kategori, dan deskripsi. Keduanya
+> mengikuti pemanggilan helper di baris 12–13 `api.php`. Endpoint PHP ini
+> merupakan demo terpisah; frontend utama tetap mengambil
+> `backend/menu.json` secara langsung.”
 
 > “Berikutnya [Nama Anggota 3] akan menjelaskan class OOP dan arsitektur MVC.”
 
@@ -506,23 +522,23 @@ informasi yang benar sebelum mulai merekam.
 1. Buka `backend/classes/Peralatan.php`.
 2. Tunjukkan baris 7–16 untuk constructor dan properti privat.
 3. Tunjukkan baris 18–30 untuk getter dan method bisnis.
-4. Tunjukkan baris 32–51 untuk `renderKartu()`.
+4. Tunjukkan baris 32–52 untuk `renderKartu()`.
 
 **Naskah bicara (Anggota 3):**
 
-> “Terima kasih [Nama Anggota 2]. Saya [Nama Anggota 3, NIM] menjelaskan
-> implementasi OOP pada Pekan 6 dan MVC pada Pekan 7.
+> “Terima kasih [Nama Anggota 2]. Saya [Nama Anggota 3, NIM], menjelaskan
+> OOP pada Pekan 6 dan arsitektur MVC pada Pekan 7.
 >
-> Class `Peralatan` adalah representasi satu alat bangunan. Constructor
-> menggunakan property promotion untuk mendefinisikan tujuh properti privat
-> bertipe, sehingga data tidak diubah langsung dari luar class. Getter
-> memberikan akses yang terkontrol, sedangkan `getHargaFormatted()` memakai
-> helper format Rupiah.
+> Di `backend/classes/Peralatan.php`, baris 5–16 mendefinisikan class
+> `Peralatan` dan constructor dengan tujuh properti privat bertipe melalui
+> property promotion. Getter pada baris 18–25 memberi akses terkontrol ke
+> data, dan `getHargaFormatted()` menggunakan helper Rupiah.
 >
-> Method `isBestSeller()` menunjukkan contoh logika bisnis sederhana.
-> `renderKartu()` menghasilkan markup kartu setelah meng-escape nilai.
-> Namun, katalog MVC sekarang dirender menggunakan template pada View; method
-> `renderKartu()` belum dipanggil oleh loop katalog.”
+> Method `isBestSeller()` pada baris 27–30 memberi contoh pemeriksaan ID
+> alat. Method `renderKartu()` pada baris 32–52 membentuk markup kartu dan
+> meng-escape nilai sebelum memasukkannya ke HTML. Perlu dicatat, katalog MVC
+> saat ini memakai template `katalog_view.php`; method `renderKartu()` belum
+> dipanggil oleh loop pada View.”
 
 #### Langkah 4.2: Pekan 7 — Alur Model-View-Controller
 
@@ -533,24 +549,32 @@ informasi yang benar sebelum mulai merekam.
 2. Buka `backend/index.php`, tunjukkan baris 3–19.
 3. Buka `backend/controllers/PeralatanController.php`, tunjukkan baris 11–28.
 4. Buka `backend/models/PeralatanModel.php`, tunjukkan baris 9–37.
-5. Buka `backend/views/katalog_view.php` dan `detail_view.php`.
+5. Buka `backend/views/katalog_view.php`, tunjukkan filter kategori pada
+   baris 100–105 dan loop kartu serta kondisi daftar kosong pada baris
+   107–136; lalu buka `backend/views/detail_view.php` baris 14–25.
 
 **Naskah bicara (Anggota 3):**
 
-> “Pada Pekan 7, `backend/index.php` bertindak sebagai Front Controller yang
-> membaca parameter `action`. Action `index` menampilkan katalog, sedangkan
-> action `show` memanggil halaman detail.
+> “Pada Pekan 7, `backend/index.php` baris 3–19 menjadi Front Controller:
+> kode membaca `action`, memanggil method `show()` untuk rute detail, atau
+> `index()` untuk katalog; action lain diberi respons 404.
 >
-> `PeralatanController` menjadi penghubung request dengan Model dan View.
-> Method `index()` membaca query kategori, meminta data ke Model, lalu
-> memuat katalog. Method `show()` memvalidasi ID, mencari alat, dan
-> menetapkan status 404 jika alat tidak ditemukan.
+> Di `backend/controllers/PeralatanController.php` baris 11–16, method
+> `index()` membaca query kategori, meminta daftar alat ke Model, lalu memuat
+> View katalog. Baris 18–28 menangani detail: ID divalidasi, alat dicari,
+> dan status HTTP 404 ditetapkan bila alat tidak ditemukan.
 >
-> `PeralatanModel` membaca JSON melalui `getDataMenu()`, menerapkan filter
-> kategori, lalu membungkus record menjadi objek `Peralatan`. View katalog
-> menampilkan daftar dan link filter; view detail menangani tampilan item
-> ditemukan maupun tidak ditemukan. Dengan pemisahan ini, Model mengurus
-> data, Controller mengatur alur, dan View menyajikan HTML.”
+> Di `backend/models/PeralatanModel.php` baris 9–24, `getAll()` membaca data,
+> menerapkan filter kategori, lalu membungkus setiap record menjadi objek
+> `Peralatan`. Method `findById()` pada baris 27–36 mencari satu alat
+> berdasarkan ID.
+>
+> Di `backend/views/katalog_view.php` baris 100–105, link kategori membentuk
+> filter server-side. Loop kartu pada baris 107–136 menampilkan daftar alat
+> atau pesan jika hasilnya kosong. Di `backend/views/detail_view.php` baris
+> 14–25, template memilih antara detail alat dan pesan alat tidak ditemukan.
+> Jadi Model mengurus data, Controller mengatur alur, dan View menyajikan
+> HTML.”
 
 #### Langkah 4.3: Live Demo MVC
 
@@ -564,10 +588,12 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 3):**
 
-> “Pembuktian di browser menunjukkan katalog PHP MVC dan filter kategori
-> server-side. Rute `action=show&id=1` menampilkan detail Bor Tangan. Ketika
-> ID yang tidak tersedia, seperti 999, dibuka, aplikasi menetapkan status
-> 404 dan menampilkan pesan ‘Alat tidak ditemukan’.”
+> “Kita buktikan alur MVC di browser. Halaman katalog memanggil action
+> `index`, dan filter ‘Alat listrik’ dikirim sebagai query kategori untuk
+> diproses Controller dan Model. Rute `action=show&id=1` melewati Front
+> Controller ke method `show()` dan menampilkan detail Bor Tangan. Jika
+> `id=999` diminta, Controller menetapkan status HTTP 404 dan View
+> menampilkan pesan ‘Alat tidak ditemukan’.”
 
 ### SEGMENT 5: PENUTUP & PEMBAGIAN KONTRIBUSI
 
@@ -577,22 +603,21 @@ informasi yang benar sebelum mulai merekam.
 
 **Naskah bicara (Anggota 3):**
 
-> “Sebagai penutup, berikut rekap kontribusi kelompok kami. Pertama,
-> [Nama Anggota 1, NIM] bertanggung jawab atas struktur HTML semantik,
-> tampilan responsif, seleksi DOM, rendering kartu, filter, pencarian, dan
-> paginasi pada Pekan 2 dan 3.
+> “Sebagai penutup, berikut rekap kontribusi kelompok kami. [Nama Anggota 1,
+> NIM] membangun UI semantik dan responsif di `frontend/index.html`, serta
+> seleksi DOM, filter kategori, pencarian, kartu dinamis, dan paginasi di
+> `frontend/script.js` pada Pekan 2 dan 3.
 >
-> Kedua, [Nama Anggota 2, NIM] bertanggung jawab atas Fetch JSON dan status
-> pemuatan pada Pekan 4, serta pembacaan data, helper PHP, dan endpoint JSON
-> pada Pekan 5.
+> [Nama Anggota 2, NIM] mengerjakan Fetch JSON dan status pemuatan pada Pekan
+> 4, lalu pembacaan data, helper filter dan format harga, serta endpoint
+> JSON PHP pada Pekan 5.
 >
-> Ketiga, [Nama Anggota 3, NIM] bertanggung jawab atas class `Peralatan`
-> berorientasi objek pada Pekan 6, serta Front Controller, Model, Controller,
-> dan View pada Pekan 7.
+> Saya, [Nama Anggota 3, NIM], mengerjakan class `Peralatan` pada Pekan 6 dan
+> Front Controller, Model, Controller, serta View pada Pekan 7.
 >
-> BangunSewa saat ini merupakan katalog dan simulasi permintaan. Data belum
-> disimpan ke database dan formulir belum mengirim pesanan. Demikian
-> presentasi proyek kami. Terima kasih atas perhatian Bapak/Ibu dosen.
+> BangunSewa saat ini adalah katalog dengan simulasi permintaan sewa. Form
+> belum mengirim atau menyimpan pesanan dan data belum disimpan ke database.
+> Demikian presentasi kami. Terima kasih atas perhatian Bapak/Ibu dosen.
 > Wassalamu’alaikum warahmatullahi wabarakatuh.”
 
 ---
