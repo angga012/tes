@@ -1,3 +1,146 @@
+<<<<<<< HEAD
+# Panduan & Naskah Video Pengganti UTS
+### BangunSewa — Katalog Sewa Alat Bangunan
+
+Dokumen ini membantu tim menyiapkan presentasi dan demo langsung untuk proyek
+BangunSewa. Arahkan penjelasan pada kode yang benar-benar tersedia di repositori:
+frontend katalog alat, pemuatan data JSON, endpoint PHP, dan aplikasi MVC.
+
+> **Catatan sebelum merekam:** Ganti placeholder nama, NIM, dan URL GitHub dengan
+> data kelompok yang benar. Pada implementasi sekarang, katalog memiliki enam
+> alat. Frontend membaca `backend/menu.json` secara langsung; endpoint
+> `backend/api.php` dapat didemonstrasikan terpisah. Formulir sewa merupakan
+> simulasi dan belum menyimpan permintaan.
+
+---
+
+## 1. Persiapan & Aturan Presentasi
+
+| Hal yang perlu ditunjukkan | Cara demonstrasi |
+| --- | --- |
+| Riwayat dan sumber proyek | Jika repositori tersedia di GitHub, mulai dengan `git clone <URL-repositori-kelompok>`, masuk ke folder hasil clone, lalu tampilkan `git log --oneline -n 10`. Jangan menggunakan URL placeholder saat rekaman. |
+| Menjalankan website | Buka terminal di root proyek yang berisi `index.php`, lalu jalankan `php -S localhost:8000`. Root proyek mengarahkan `/` ke halaman frontend. |
+| Hasil yang berjalan | Tampilkan katalog frontend, API JSON, dan MVC PHP pada browser; jelaskan perbedaan sumber/alur datanya. |
+| Pembagian anggota | Anggota 1 membahas HTML dan DOM, Anggota 2 membahas pemuatan data serta API/helper, Anggota 3 membahas class OOP dan MVC. |
+| Kejujuran demo | Jangan menyebut transaksi tersimpan, data 30 alat, atau frontend memakai REST API. Kode saat ini menggunakan enam data alat dan formulir simulasi. |
+
+### Struktur proyek yang akan dipresentasikan
+
+```text
+Promosi/
+├── index.php
+├── frontend/
+│   ├── index.html
+│   └── script.js
+└── backend/
+    ├── menu.json
+    ├── api.php
+    ├── data/data_menu.php
+    ├── helpers/functions.php
+    ├── classes/Peralatan.php
+    ├── controllers/PeralatanController.php
+    ├── models/PeralatanModel.php
+    ├── views/katalog_view.php
+    ├── views/detail_view.php
+    └── index.php
+```
+
+`Pertama/`, `Kedua/`, dan `Ketiga/` berisi versi halaman dari tahap-tahap
+sebelumnya. Demo interaktif terbaru berada di `frontend/`.
+
+## 2. Roadmap & Pembagian Materi
+
+```mermaid
+flowchart LR
+    A["Pembukaan & jalankan server"] --> B["Anggota 1: UI dan DOM"]
+    B --> C["Anggota 2: JSON, Fetch, API dan helper"]
+    C --> D["Anggota 3: OOP dan MVC"]
+    D --> E["Rekap kontribusi & penutup"]
+```
+
+| Anggota | Fokus | File utama | Demo |
+| --- | --- | --- | --- |
+| **Anggota 1** | Pekan 2–3: UI semantik, Tailwind, DOM, filter, pencarian, paginasi | `frontend/index.html`, `frontend/script.js` | Ubah ukuran layar, cari “bor”, pilih kategori “Alat listrik”, tampilkan kartu selanjutnya. |
+| **Anggota 2** | Pekan 4–5: Fetch JSON, loading/error/empty state, helper PHP, endpoint JSON | `frontend/script.js`, `backend/menu.json`, `backend/data/data_menu.php`, `backend/helpers/functions.php`, `backend/api.php` | Tunjukkan katalog dimuat, empty state pencarian, JSON API, dan filter kategori API. |
+| **Anggota 3 (Lead)** | Pekan 6–7: class `Peralatan`, Model, Controller, routing dan View | `backend/classes/Peralatan.php`, `backend/models/PeralatanModel.php`, `backend/controllers/PeralatanController.php`, `backend/index.php`, `backend/views/` | Buka katalog MVC, filter “Alat listrik”, detail alat, dan respons 404. |
+
+### Rincian kode per anggota
+
+#### 👤 Anggota 1 — Frontend UI & Interaktivitas DOM (Pekan 2–3)
+
+- **Pekan 2 — `frontend/index.html`:**
+  - Baris 12–30: konfigurasi warna Tailwind bertema earthy dan font.
+  - Baris 65 dan seterusnya: struktur semantik `<main>`, hero, katalog, langkah
+    sewa, formulir, dan footer.
+  - Baris 274–281: kolom pencarian, filter kategori, grid responsif
+    `grid-cols-2 lg:grid-cols-3`, dan tombol “Lihat Lebih Banyak”.
+- **Pekan 3 — `frontend/script.js`:**
+  - Baris 1–22: pemilihan elemen DOM dan URL data.
+  - Baris 73–97: pembuatan tombol kategori dan event klik.
+  - Baris 99–208: filter data, empty state, dan rendering kartu alat ke DOM.
+  - Baris 289–297: pencarian realtime dan paginasi bertambah empat kartu.
+- **Penjelasan tambahan:** Terangkan bahwa kartu dibuat berdasarkan data, bukan
+  diduplikasi satu per satu di HTML. Pencarian mencocokkan nama, kategori, dan
+  deskripsi. Layout katalog menampilkan dua kolom pada layar lebih kecil dan
+  tiga kolom pada breakpoint `lg`.
+- **Demo:** `http://localhost:8000/frontend/index.html` → ubah ukuran layar →
+  pilih kategori “Alat listrik” → cari “bor” → tekan “Lihat Lebih Banyak”.
+
+#### 👤 Anggota 2 — Integrasi Data, REST API & Helper PHP (Pekan 4–5)
+
+- **Pekan 4 — `frontend/script.js`:**
+  - Baris 22: frontend mengambil `../backend/menu.json` menggunakan Fetch.
+  - Baris 210–287: `fetchTools()` menggunakan `async/await`, memeriksa respons,
+    memvalidasi bentuk data, dan menangani loading/success/error serta retry.
+  - Baris 126–145: empty state saat data tidak cocok dengan pencarian/filter.
+- **Pekan 5 — data dan pemrosesan PHP:**
+  - `backend/menu.json`: sumber bersama berisi enam alat dan atribut
+    `id`, `name`, `imageUrl`, `imageSource`, `category`, `description`, dan
+    `pricePerDay`.
+  - `backend/data/data_menu.php` baris 3–19: membaca dan memvalidasi JSON agar
+    dapat digunakan oleh API maupun Model.
+  - `backend/helpers/functions.php` baris 3–35: `formatRupiah()`,
+    `saringMenu()`, dan `saringMenuByKategori()`.
+  - `backend/api.php` baris 6–22: mengirim respons JSON, menerima parameter
+    `kategori` dan `q`, lalu menerapkan helper filter.
+- **Penjelasan tambahan:** Bedakan dua jalur dengan jelas. Halaman frontend
+  membaca file JSON agar tetap berjalan di server statis seperti Live Server.
+  Endpoint PHP adalah demonstrasi API tersendiri, menggunakan sumber data JSON
+  yang sama dan dapat menyaring kategori/kata kunci di server.
+- **Demo:** Buka `http://localhost:8000/backend/api.php`, kemudian
+  `http://localhost:8000/backend/api.php?kategori=Alat%20listrik`, dan
+  `http://localhost:8000/backend/api.php?q=bor`. Kembali ke frontend dan cari
+  teks acak untuk melihat empty state.
+
+#### 👤 Anggota 3 (Lead) — OOP, MVC & Integrasi (Pekan 6–7)
+
+- **Opening:** Tampilkan proses clone repositori (bila tersedia), `git log`,
+  buka root proyek, lalu jalankan `php -S localhost:8000`.
+- **Pekan 6 — `backend/classes/Peralatan.php`:**
+  - Baris 5–16: class `Peralatan` dan konstruktor dengan tujuh properti privat
+    bertipe.
+  - Baris 18–30: getter, format harga, dan `isBestSeller()`.
+  - Baris 32–51: `renderKartu(): string` untuk membangun markup kartu.
+- **Pekan 7 — MVC:**
+  - `backend/index.php` baris 1–19: front controller membaca `action` dan
+    memilih rute katalog atau detail.
+  - `backend/controllers/PeralatanController.php` baris 11–28: method
+    `index()` dan `show()` menyiapkan data atau menetapkan status 404.
+  - `backend/models/PeralatanModel.php` baris 7–37: mengambil data, membuat
+    objek `Peralatan`, dan mencari alat berdasarkan ID.
+  - `backend/views/katalog_view.php` dan `detail_view.php`: template katalog,
+    detail alat, escaping output, dan tampilan item tidak ditemukan.
+- **Penjelasan tambahan:** Uraikan alurnya sebagai
+  `index.php → Controller → Model → data JSON → View`. Class `Peralatan`
+  merepresentasikan satu alat, sedangkan Model mengubah record JSON menjadi
+  objek. Jika ID detail tidak ada, Controller mengirim status HTTP 404 dan
+  View menampilkan pesan yang sesuai.
+- **Demo:** `http://localhost:8000/backend/index.php` → filter kategori
+  “Alat listrik” → `http://localhost:8000/backend/index.php?action=show&id=1`
+  → `http://localhost:8000/backend/index.php?action=show&id=999`.
+- **Closing:** rangkum kontribusi tiap anggota dan sampaikan batasan aplikasi
+  bahwa formulir belum mengirim atau menyimpan permintaan sewa.
+=======
 # Panduan & Naskah Video Presentasi Proyek BangunSewa
 ### Website Promosi dan Katalog Sewa Alat Bangunan
 
@@ -108,11 +251,169 @@ Nomor berikut adalah nomor baris pada berkas proyek saat panduan ini disusun. Ji
   - Baris **127–193**: bagian cara sewa dan formulir demo.
 
 > **Penyesuaian terhadap kode proyek:** folder ini tidak memiliki endpoint REST API PHP, fungsi helper prosedural terpisah, ataupun file `data_menu.php`. Materi API Pekan 4 didemonstrasikan dengan Fetch API ke `tools.json`; materi Core PHP Pekan 5 ditunjukkan lewat pengambilan array data, `require_once`, dan `foreach` pada alur PHP yang tersedia. Pekan 6 membahas OOP, sedangkan Pekan 7 menghubungkan komponen MVC. Jangan menyebut Fetch JSON sebagai REST API.
+>>>>>>> 58eb4934c24de8b3d9870195f9a64424cb83a97b
 
 ---
 
 ## 3. Naskah Siap Rekam
 
+<<<<<<< HEAD
+Silakan ganti teks dalam tanda kurung siku dengan identitas kelompok.
+
+### Segmen 1 — Pembukaan & Menjalankan Aplikasi (Anggota 3)
+
+**Aksi layar:** tampilkan terminal, repositori, VS Code, lalu jalankan server
+dari root proyek.
+
+**Naskah:**
+
+> “Assalamu’alaikum warahmatullahi wabarakatuh. Kami dari kelompok
+> [nama kelompok], beranggotakan [nama anggota], akan mempresentasikan proyek
+> **BangunSewa — Katalog Sewa Alat Bangunan**. Proyek ini menampilkan informasi
+> dan harga sewa alat bangunan melalui katalog frontend serta versi PHP MVC.
+>
+> Kami mulai dengan menampilkan repositori dan riwayat pengerjaan. Selanjutnya
+> server PHP dijalankan dari folder utama proyek menggunakan `php -S
+> localhost:8000`. Folder utama memiliki `index.php` yang mengarahkan alamat
+> root ke frontend. Silakan buka `http://localhost:8000/` untuk halaman utama.
+>
+> Untuk frontend dan interaksi katalog, penjelasan dilanjutkan oleh
+> [Nama Anggota 1].”
+
+### Segmen 2 — Pekan 2–3: UI & DOM (Anggota 1)
+
+**Aksi layar:** buka `frontend/index.html`, tunjukkan konfigurasi Tailwind,
+struktur halaman, search/filter, dan grid; lalu buka `frontend/script.js`.
+
+**Naskah:**
+
+> “Terima kasih [Nama Anggota 3]. Saya [Nama Anggota 1, NIM] membahas
+> antarmuka BangunSewa pada Pekan 2 dan interaksi DOM pada Pekan 3.
+>
+> Di `frontend/index.html`, kami menggunakan struktur HTML semantik seperti
+> `header`, `main`, `section`, dan `footer`. Tema Tailwind menambahkan palet
+> warna hijau, oranye, dan latar terang yang sesuai dengan identitas
+> BangunSewa. Bagian katalog memakai grid responsif: dua kolom pada layar kecil
+> dan tiga kolom pada layar lebar.
+>
+> Di `frontend/script.js`, elemen halaman dipilih melalui DOM API. Tombol
+> kategori mengubah filter yang aktif, kolom pencarian menyaring nama,
+> kategori, dan deskripsi secara realtime, dan tombol ‘Lihat Lebih Banyak’
+> menambahkan empat alat ke daftar yang terlihat. Kartu dibuat dari data
+> katalog secara dinamis.”
+
+**Aksi browser:** buka frontend, aktifkan device toolbar untuk melihat
+responsivitas, pilih “Alat listrik”, cari “bor”, lalu klik tombol paginasi.
+
+**Naskah:**
+
+> “Hasilnya terlihat langsung di browser. Grid menyesuaikan ukuran layar,
+> filter kategori membatasi alat yang ditampilkan, pencarian ‘bor’ menemukan
+> Bor Tangan, dan tombol ‘Lihat Lebih Banyak’ membuka kartu berikutnya tanpa
+> reload halaman. Jika tidak ada hasil, halaman menampilkan empty state.”
+
+> “Berikutnya [Nama Anggota 2] akan menjelaskan pemuatan data dan API.”
+
+### Segmen 3 — Pekan 4–5: Fetch, Data & API (Anggota 2)
+
+**Aksi layar:** tunjukkan `fetchTools()` di `frontend/script.js`, lalu
+`backend/menu.json`, `data_menu.php`, `helpers/functions.php`, dan `api.php`.
+
+**Naskah:**
+
+> “Terima kasih [Nama Anggota 1]. Saya [Nama Anggota 2, NIM] membahas
+> pemuatan data asinkron dan pemrosesan data pada Pekan 4 dan 5.
+>
+> Frontend menggunakan `fetch()` dan `async/await` untuk membaca
+> `backend/menu.json`. Data dipisahkan dari markup sehingga kartu katalog
+> dibuat berdasarkan isi berkas tersebut. Fungsi `fetchTools()` menampilkan
+> status loading, menangani data berhasil, dan menampilkan pesan serta tombol
+> coba lagi jika pemuatan gagal. Empty state muncul ketika filter atau
+> pencarian tidak menghasilkan alat.
+>
+> Untuk pemrosesan PHP, `data_menu.php` membaca serta memvalidasi JSON.
+> `functions.php` berisi helper untuk format Rupiah, pencarian kata kunci, dan
+> filter kategori. Endpoint `api.php` mengubah data menjadi JSON dan dapat
+> menerima parameter `kategori` maupun `q`.
+>
+> Catatan arsitektur: frontend saat ini membaca berkas JSON langsung agar bisa
+> berjalan di server statis. Endpoint PHP adalah demo API terpisah, tetapi
+> keduanya memakai sumber data katalog yang sama.”
+
+**Aksi browser:** tampilkan frontend dengan pencarian acak, lalu buka
+`/backend/api.php` dan `/backend/api.php?kategori=Alat%20listrik`.
+
+**Naskah:**
+
+> “Di frontend, kata pencarian yang tidak cocok menghasilkan empty state. Pada
+> endpoint API, kita melihat respons JSON. Ketika parameter kategori
+> ditambahkan, server mengembalikan hanya alat listrik. Selanjutnya
+> [Nama Anggota 3] menjelaskan class dan arsitektur MVC.”
+
+### Segmen 4 — Pekan 6–7: OOP & MVC (Anggota 3)
+
+**Aksi layar:** buka class, Model, Controller, router, dan view satu per satu.
+
+**Naskah:**
+
+> “Pada Pekan 6 kami menyusun class `Peralatan` sebagai representasi satu alat.
+> Class memiliki properti privat bertipe, getter, format harga, serta method
+> `renderKartu()`. Enkapsulasi ini membuat akses dan penyajian data dilakukan
+> melalui method yang jelas.
+>
+> Pada Pekan 7 kami menerapkan alur MVC. `backend/index.php` membaca parameter
+> action sebagai front controller. Controller memilih data katalog atau
+> pencarian detail. Model membaca data dan membungkus setiap record menjadi
+> objek `Peralatan`. View bertugas menampilkan halaman katalog atau detail.
+>
+> Pada rute detail, ID yang tersedia menampilkan informasi alat. ID yang tidak
+> ditemukan menghasilkan status HTTP 404 dan pesan ‘Alat tidak ditemukan’.
+> Output teks di view juga di-escape sebelum ditampilkan.”
+
+**Aksi browser:** buka katalog MVC, klik filter kategori, buka detail ID 1,
+kemudian buka detail ID 999.
+
+**Naskah:**
+
+> “Demo memperlihatkan katalog MVC, filter kategori server-side, halaman detail
+> Bor Tangan, dan penanganan ID yang tidak tersedia. Formulir di proyek ini
+> tetap berupa simulasi; belum ada pesanan yang dikirim atau disimpan.”
+
+### Segmen 5 — Rekap & Penutup (Anggota 3)
+
+**Naskah:**
+
+> “Sebagai rekap, [Nama Anggota 1] menangani UI semantik dan interaksi DOM;
+> [Nama Anggota 2] menangani pemuatan data, helper, serta endpoint API; dan
+> saya, [Nama Anggota 3], menangani class OOP serta alur MVC. Proyek ini
+> merupakan demo katalog sewa alat bangunan dan belum mencakup transaksi atau
+> penyimpanan pesanan.
+>
+> Demikian presentasi proyek BangunSewa dari kelompok kami. Terima kasih atas
+> perhatian Bapak/Ibu dosen. Wassalamu’alaikum warahmatullahi wabarakatuh.”
+
+---
+
+## 4. Panduan Teknis Rekaman
+
+1. Pastikan PHP tersedia dengan `php -v`.
+2. Buka terminal di root proyek (folder yang berisi `index.php`), kemudian:
+   ```powershell
+   php -S localhost:8000
+   ```
+3. Buka halaman utama di <http://localhost:8000/>. Untuk demo langsung:
+   - Frontend: <http://localhost:8000/frontend/index.html>
+   - API: <http://localhost:8000/backend/api.php>
+   - API kategori: <http://localhost:8000/backend/api.php?kategori=Alat%20listrik>
+   - Katalog MVC: <http://localhost:8000/backend/index.php>
+   - Kategori MVC: <http://localhost:8000/backend/index.php?kategori=Alat%20listrik>
+   - Detail: <http://localhost:8000/backend/index.php?action=show&id=1>
+   - Uji 404: <http://localhost:8000/backend/index.php?action=show&id=999>
+4. Pastikan browser dan terminal terlihat saat demo; jangan membuka frontend
+   lewat `file://`, karena browser dapat membatasi pemuatan JSON lokal.
+5. Siapkan tautan repositori yang benar dan isi placeholder nama/NIM sebelum
+   membagikan panduan atau mulai merekam.
+=======
 ### SEGMENT 1 — Pembukaan dan Menjalankan Proyek
 **Pembicara:** Anggota 3 / Lead · **Durasi saran:** 1–2 menit
 
@@ -358,11 +659,39 @@ Jika repositori belum tersedia secara publik, lewati demonstrasi `git clone` dan
 - [ ] Tampilkan kode yang relevan bersamaan dengan hasilnya di browser.
 - [ ] Jangan tampilkan nomor WhatsApp atau informasi kontak yang belum dikonfirmasi sebagai kontak aktif.
 - [ ] Pastikan deskripsi video dan status publik mengikuti instruksi pengumpulan yang berlaku.
+>>>>>>> 58eb4934c24de8b3d9870195f9a64424cb83a97b
 
 ---
 
 ## 5. Template Deskripsi Video
 
+<<<<<<< HEAD
+```text
+TUGAS PENGGANTI UTS PEMROGRAMAN WEB
+
+Nama Proyek: BangunSewa — Katalog Sewa Alat Bangunan
+Repositori: [URL GitHub kelompok]
+
+ANGGOTA DAN KONTRIBUSI:
+1. [NIM] - [Nama Anggota 1]
+   Peran: Frontend UI & DOM
+   Kontribusi: HTML semantik, tema Tailwind, rendering kartu, filter, pencarian, paginasi.
+   File: frontend/index.html, frontend/script.js
+
+2. [NIM] - [Nama Anggota 2]
+   Peran: Integrasi Data & API
+   Kontribusi: Fetch JSON, status loading/error/empty, data katalog, helper PHP, endpoint JSON.
+   File: frontend/script.js, backend/menu.json, backend/data/data_menu.php,
+         backend/helpers/functions.php, backend/api.php
+
+3. [NIM] - [Nama Anggota 3]
+   Peran: Lead, OOP & MVC
+   Kontribusi: Class Peralatan, Model, Controller, routing, katalog/detail view.
+   File: backend/classes/Peralatan.php, backend/models/PeralatanModel.php,
+         backend/controllers/PeralatanController.php, backend/index.php, backend/views/
+
+Catatan: Formulir sewa pada versi demo belum menyimpan atau mengirim transaksi.
+=======
 Salin dan lengkapi bagian dalam tanda kurung siku sebelum mengunggah:
 
 ```text
@@ -394,4 +723,5 @@ TIMESTAMPS / CHAPTERS:
 09:00 Pekan 6: OOP - class PeralatanModel dan enkapsulasi
 10:30 Pekan 7: MVC - Model, Controller, View, dan demo katalog
 13:30 Kesimpulan dan pembagian kontribusi
+>>>>>>> 58eb4934c24de8b3d9870195f9a64424cb83a97b
 ```
